@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EnterPilots"
+    android:background="@android:color/background_dark"
+
+
+
+
+
+
+
+
+
+
+    >
+
+
+    <EditText
+        android:id="@+id/enterPilotName"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="110dp"
+        android:layout_marginEnd="98dp"
+        android:layout_marginRight="98dp"
+        android:layout_marginBottom="572dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Enter Pilot Name"
+        android:textAlignment="center"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="3dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="-8dp"
+        android:layout_marginEnd="-3dp"
+        android:layout_marginRight="-3dp"
+        android:layout_marginBottom="512dp"
+        android:text="Select the Band Desired and choose the channel in the combo box"
+        android:textAlignment="center"
+        android:textColor="@android:color/white" />
+
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="155dp"
+        android:layout_height="235dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginEnd="245dp"
+        android:layout_marginRight="245dp"
+        android:layout_marginBottom="247dp">
+
+        <RadioButton
+            android:id="@+id/bandA"
+            android:layout_width="98dp"
+            android:layout_height="43dp"
+            android:background="@android:color/holo_red_dark"
+            android:onClick="bandAClicked"
+            android:text="BandA" />
+
+        <RadioButton
+            android:id="@+id/bandB"
+            android:layout_width="98dp"
+            android:layout_height="43dp"
+            android:background="@android:color/holo_red_dark"
+            android:onClick="bandBClicked"
+            android:text="BandB" />
+
+        <RadioButton
+            android:id="@+id/bandE"
+            android:layout_width="98dp"
+            android:layout_height="43dp"
+            android:background="@android:color/holo_red_dark"
+            android:text="BandE" />
+
+        <RadioButton
+            android:id="@+id/bandF"
+            android:layout_width="98dp"
+            android:layout_height="43dp"
+            android:background="@android:color/holo_red_dark"
+            android:text="BandF" />
+
+        <RadioButton
+            android:id="@+id/bandR"
+            android:layout_width="98dp"
+            android:layout_height="43dp"
+            android:background="@android:color/holo_red_dark"
+            android:text="BandR" />
+    </RadioGroup>
+
+    <Spinner
+        android:id="@+id/channelListView"
+        android:layout_width="188dp"
+        android:layout_height="wrap_content"
+
+        android:layout_above="@+id/enterButton"
+        android:layout_alignTop="@+id/radioGroup"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="-1dp"
+        android:layout_marginEnd="58dp"
+        android:layout_marginRight="58dp"
+        android:layout_marginBottom="320dp"
+        android:background="@android:color/background_light"
+        android:splitMotionEvents="false"
+        android:textAlignment="center" />
+
+
+    <Button
+        android:id="@+id/enterButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="149dp"
+        android:layout_marginLeft="149dp"
+        android:layout_marginEnd="152dp"
+        android:layout_marginRight="152dp"
+        android:layout_marginBottom="50dp"
+        android:text="Enter Pilot"
+        android:onClick="enterPilotClicked"
+        />
+
+
+
+
+</RelativeLayout>

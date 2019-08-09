@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/menuStartScene"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_dark"
+    tools:context=".menuStart">
+
+    <ImageButton
+        android:id="@+id/loadpilots"
+        android:layout_width="200dp"
+        android:layout_height="63dp"
+
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="162dp"
+        android:background="@drawable/loadpilots"
+        android:onClick="loadPilotsIn"
+        app:srcCompat="@drawable/loadpilots" />
+
+    <ImageButton
+        android:id="@+id/enterPilots"
+        android:layout_width="200dp"
+        android:layout_height="63dp"
+        android:layout_below="@+id/loadpilots"
+        android:layout_alignStart="@+id/loadpilots"
+        android:layout_alignLeft="@+id/loadpilots"
+        android:layout_alignEnd="@+id/loadpilots"
+        android:layout_alignRight="@+id/loadpilots"
+        android:layout_marginStart="-2dp"
+        android:layout_marginLeft="-2dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
+        android:onClick="goToEnterPilots"
+        app:srcCompat="@drawable/enterpilots" />
+
+    <ImageButton
+        android:id="@+id/configure"
+        android:layout_width="210dp"
+        android:layout_height="72dp"
+        android:layout_below="@+id/enterPilots"
+        android:layout_alignStart="@+id/enterPilots"
+        android:layout_alignLeft="@+id/enterPilots"
+        android:layout_alignEnd="@+id/enterPilots"
+        android:layout_alignRight="@+id/enterPilots"
+        android:layout_marginStart="-5dp"
+        android:layout_marginLeft="-5dp"
+        android:layout_marginTop="59dp"
+        android:layout_marginEnd="-5dp"
+        android:layout_marginRight="-5dp"
+        android:onClick="goToConfigure"
+        app:srcCompat="@drawable/configure" />
+
+
+    <ImageButton
+        android:id="@+id/startButton"
+        android:layout_width="200dp"
+        android:layout_height="63dp"
+        android:layout_below="@+id/configure"
+        android:layout_alignStart="@+id/configure"
+        android:layout_alignLeft="@+id/configure"
+        android:layout_alignEnd="@+id/configure"
+        android:layout_alignRight="@+id/configure"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:onClick="goToStartRace"
+        app:srcCompat="@drawable/startrace" />
+
+</RelativeLayout>

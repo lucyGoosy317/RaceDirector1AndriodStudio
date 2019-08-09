@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HeatConfigure">
+
+    <GridView
+        android:layout_width="174dp"
+        android:layout_height="288dp"
+        android:layout_alignTop="@+id/heatComboBox"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="183dp"
+        tools:layout_editor_absoluteX="5dp"
+        tools:layout_editor_absoluteY="273dp" />
+
+    <Spinner
+        android:id="@+id/heatComboBox"
+        android:layout_width="206dp"
+        android:layout_height="22dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="28dp"
+        android:layout_marginRight="28dp"
+        android:layout_marginBottom="448dp"
+        app:layout_constraintStart_toEndOf="@+id/_dynamic"
+        app:layout_constraintTop_toTopOf="@+id/_dynamic" />
+
+    <Button
+        android:id="@+id/addPilotToHeatButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginBottom="25dp"
+        android:text="Add Pilot"
+        app:layout_constraintTop_toBottomOf="@+id/_dynamic"
+        tools:layout_editor_absoluteX="70dp" />
+
+    <Button
+        android:id="@+id/FinishedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginRight="13dp"
+        android:layout_marginBottom="588dp"
+        android:text="Finished"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="307dp" />
+
+    <Button
+        android:id="@+id/removePilotFromHeatButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginBottom="24dp"
+        android:text="Remove Pilot"
+        app:layout_constraintTop_toTopOf="@+id/addPilotToHeatButton"
+        tools:layout_editor_absoluteX="216dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/heatComboBox"
+        android:layout_alignStart="@+id/heatComboBox"
+        android:layout_alignLeft="@+id/heatComboBox"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="-1dp"
+        android:text="Select Heat"
+        app:layout_constraintBottom_toTopOf="@+id/heatComboBox"
+        app:layout_constraintStart_toStartOf="@+id/heatComboBox" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="95dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/_dynamic"
+        android:layout_alignEnd="@+id/_dynamic"
+        android:layout_alignRight="@+id/_dynamic"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="3dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="236dp"
+        android:layout_marginEnd="76dp"
+        android:layout_marginRight="76dp"
+        android:layout_marginBottom="6dp"
+        android:text="Pilots In Heat"
+        app:layout_constraintEnd_toEndOf="@+id/_dynamic"
+        app:layout_constraintStart_toStartOf="@+id/_dynamic"
+        tools:layout_editor_absoluteY="252dp" />
+
+</RelativeLayout>
