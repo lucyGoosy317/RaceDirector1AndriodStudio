@@ -55,9 +55,9 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="68dp"
-        android:layout_marginEnd="13dp"
-        android:layout_marginRight="13dp"
-        android:layout_marginBottom="588dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="672dp"
         android:text="Finished"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="307dp" />
@@ -110,5 +110,17 @@
         app:layout_constraintEnd_toEndOf="@+id/_dynamic"
         app:layout_constraintStart_toStartOf="@+id/_dynamic"
         tools:layout_editor_absoluteY="252dp" />
+
+    <Spinner
+        android:id="@+id/PilotListSpinner"
+        android:layout_width="208dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="-283dp"
+        android:layout_marginEnd="29dp"
+        android:layout_marginRight="29dp"
+        android:layout_marginBottom="310dp" />
 
 </RelativeLayout>

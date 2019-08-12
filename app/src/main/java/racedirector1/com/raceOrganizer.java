@@ -16,7 +16,7 @@ import static racedirector1.com.MainActivity.RaceData;
 public class raceOrganizer {
 
     public HashMap<Integer,Round> rounds;
-    //public ArrayList<Heat> heats;
+    public ArrayList<Heat> heats;
     public HashMap<String,Pilots> pilotGeneralPilotList;
     public ArrayList<Channel> channelListBandA;
     public ArrayList<Channel> channelListBandB;
@@ -34,8 +34,7 @@ public class raceOrganizer {
         channelListBandE = new ArrayList<Channel>();
         channelListBandF = new ArrayList<Channel>();
         channelListBandR = new ArrayList<Channel>();
-
-        //heats = new ArrayList<Heat>();
+        heats = new ArrayList<Heat>();
 
     }
 
@@ -49,13 +48,13 @@ public class raceOrganizer {
         this.rounds = rounds;
     }
 
-   // public ArrayList<Heat> getHeats() {
-    //    return heats;
-   // }
+    public ArrayList<Heat> getHeats() {
+        return heats;
+    }
 
-  //  public void setHeats(ArrayList<Heat> heats) {
-   //     this.heats = heats;
-   // }
+    public void setHeats(ArrayList<Heat> heats) {
+        this.heats = heats;
+    }
 
     public HashMap<String, Pilots> getPilotGeneralPilotList() {
         return pilotGeneralPilotList;
@@ -178,6 +177,7 @@ public class raceOrganizer {
             return check;
 
     }
+
     //To check if the pilot is already entered in the race
     public boolean checkIfPilotAlreadyInRace(Pilots pilot){
         boolean check=true;
@@ -206,8 +206,10 @@ public class raceOrganizer {
             for(int l=1;l<=heatCount;l++){
                 Heat newHeat= new Heat("Heat:"+l);
                 //Fill current round with the amount of heats desired from edit box
-                newRound.heat.put(l,newHeat);
+                //newRound.heat.put(l,newHeat);
 
+                //right now the round does not have any heats
+                heats.add(newHeat);
 
             }
 

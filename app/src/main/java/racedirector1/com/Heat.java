@@ -1,9 +1,9 @@
 package racedirector1.com;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class Heat {
-    public HashMap<String,Pilots> PilotsInHeat; // pilot name is the key and Pilots object is the value
+    public ArrayList<Pilots> PilotsInHeat; // pilot name is the key and Pilots object is the value
     public String heatName;
 
 
@@ -13,18 +13,18 @@ public class Heat {
 
     public Heat(String heatName) {
         this.heatName=heatName;
-        PilotsInHeat= new HashMap<String, Pilots>();
+        PilotsInHeat= new ArrayList<Pilots>();
 
     }
 
 
     //**************Getters & Setters***************
 
-    public HashMap<String, Pilots> getPilotsInHeat() {
+    public ArrayList<Pilots> getPilotsInHeat() {
         return PilotsInHeat;
     }
 
-    public void setPilotsInHeat(HashMap<String, Pilots> pilotsInHeat) {
+    public void setPilotsInHeat(ArrayList<Pilots> pilotsInHeat) {
         PilotsInHeat = pilotsInHeat;
     }
 
@@ -64,7 +64,7 @@ public class Heat {
 
 
     public String toString() {
-        String ret="";
+        String ret;
         ret=heatName;
 
         return ret;
