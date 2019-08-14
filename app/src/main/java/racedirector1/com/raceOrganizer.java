@@ -8,10 +8,15 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
-
 import static racedirector1.com.MainActivity.RaceData;
 
+/**
+ * @raceOrganizer
+ * will organize the race data contents
+ */
 public class raceOrganizer {
 
     public HashMap<Integer,Round> rounds;
@@ -24,7 +29,9 @@ public class raceOrganizer {
     public ArrayList<Channel> channelListBandR;
 
 
-    //Constructor for raceOrganizer
+    /**
+     * Constructor
+     */
     public raceOrganizer() {
         rounds = new HashMap<Integer, Round>();
         pilotGeneralPilotList = new ArrayList<Pilots>();
@@ -33,7 +40,8 @@ public class raceOrganizer {
         channelListBandE = new ArrayList<Channel>();
         channelListBandF = new ArrayList<Channel>();
         channelListBandR = new ArrayList<Channel>();
-        heats = new ArrayList<Heat>();
+        heats = new ArrayList<Heat>();//used to get the amount of Heats
+
 
     }
 
@@ -106,8 +114,10 @@ public class raceOrganizer {
 
     //***************************Class Methods********************************
 
-    //Load channels before app starts from .cvs from
-    //res dir
+    /**
+     * @loadChannels Load channels before app starts from .cvs from
+     * res dir
+     */
     public void loadChannels() {
         String file = "res/raw/channellist.csv";
         InputStream in = this.getClass().getClassLoader().getResourceAsStream(file);
@@ -159,10 +169,16 @@ public class raceOrganizer {
     }
 
     //***************************Pilot SetUp*******************************
-    //To Create a new pilot from scratch, used in enter Pilots from menu
+    /**
+     *
+     * @param Name name of pilot passed from user entry
+     * @param channel channel of pilot passed from user entry
+     * @return check of value to view if the pilot exist inside the ArrayList
+     */
     public boolean makeNewPilot(String Name, Channel channel) {
         Pilots pilot = new Pilots(Name, channel);
         boolean check = true;
+        //pass the object pilot to method check, to see if the pilot already exist inside the gen pilot arraylist
         if (checkIfPilotAlreadyInRace(pilot) == true) {
             System.out.println("adding pilot into race");
             RaceData.pilotGeneralPilotList.add(pilot);
@@ -177,17 +193,25 @@ public class raceOrganizer {
 
     }
 
-    //To check if the pilot is already entered in the race, Had to change to Arraylist might comeback and change
+    /**
+     *
+     * @param pilot pilot object which was passed to check if the pilot is inside the arrayList
+     * @return return a true or false depending on condition if a pilot exist inside the arrayList
+     */
     public boolean checkIfPilotAlreadyInRace(Pilots pilot){
         boolean check=true;
 
-        if(pilotGeneralPilotList.contains(pilot)){
-            System.out.println("Pilot already exist in the race");
-            check=false;
-        }else{
-            check=true;
+
+        //linear search for
+        for(int x=0;x<pilotGeneralPilotList.size(); x++) {
+            if (pilotGeneralPilotList.get(x).getPilotName().equals(pilot.getPilotName())) {
+                System.out.println("Pilot already exist in the race");
+                check = false;
+            } else {
+                check = true;
+            }
         }
-        return check;
+            return check;
 
     }
     //**********************************************************************
