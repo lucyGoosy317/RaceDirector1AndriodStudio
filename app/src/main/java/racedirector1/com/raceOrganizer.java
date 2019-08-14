@@ -8,7 +8,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 
 import static racedirector1.com.MainActivity.RaceData;
@@ -17,7 +16,7 @@ public class raceOrganizer {
 
     public HashMap<Integer,Round> rounds;
     public ArrayList<Heat> heats;
-    public HashMap<String,Pilots> pilotGeneralPilotList;
+    public ArrayList<Pilots> pilotGeneralPilotList;
     public ArrayList<Channel> channelListBandA;
     public ArrayList<Channel> channelListBandB;
     public ArrayList<Channel> channelListBandE;
@@ -28,7 +27,7 @@ public class raceOrganizer {
     //Constructor for raceOrganizer
     public raceOrganizer() {
         rounds = new HashMap<Integer, Round>();
-        pilotGeneralPilotList = new HashMap<String, Pilots>();
+        pilotGeneralPilotList = new ArrayList<Pilots>();
         channelListBandA = new ArrayList<Channel>();
         channelListBandB = new ArrayList<Channel>();
         channelListBandE = new ArrayList<Channel>();
@@ -56,11 +55,11 @@ public class raceOrganizer {
         this.heats = heats;
     }
 
-    public HashMap<String, Pilots> getPilotGeneralPilotList() {
+    public ArrayList<Pilots> getPilotGeneralPilotList() {
         return pilotGeneralPilotList;
     }
 
-    public void setPilotGeneralPilotList(HashMap<String, Pilots> pilotGeneralPilotList) {
+    public void setPilotGeneralPilotList(ArrayList<Pilots> pilotGeneralPilotList) {
         this.pilotGeneralPilotList = pilotGeneralPilotList;
     }
 
@@ -166,7 +165,7 @@ public class raceOrganizer {
         boolean check = true;
         if (checkIfPilotAlreadyInRace(pilot) == true) {
             System.out.println("adding pilot into race");
-            RaceData.pilotGeneralPilotList.put(pilot.getPilotName(),pilot);
+            RaceData.pilotGeneralPilotList.add(pilot);
             System.out.println(RaceData.pilotGeneralPilotList.toString());
             check = true;
         } else {
@@ -178,11 +177,11 @@ public class raceOrganizer {
 
     }
 
-    //To check if the pilot is already entered in the race
+    //To check if the pilot is already entered in the race, Had to change to Arraylist might comeback and change
     public boolean checkIfPilotAlreadyInRace(Pilots pilot){
         boolean check=true;
 
-        if(pilotGeneralPilotList.containsKey(pilot.getPilotName())){
+        if(pilotGeneralPilotList.contains(pilot)){
             System.out.println("Pilot already exist in the race");
             check=false;
         }else{
@@ -196,17 +195,19 @@ public class raceOrganizer {
     //***************Configure the Race*********************
     //will take in the amount of rounds the user wants to have and the amount of heats
     //used in ConfigureRace Activity.
-    public void configureRace(int heatCount,int roundCount){
+    public void configureRace(int roundCount,int heatCount){
 
         //create the amount of Rounds, might have to come back on that round count
-        for(int i=1;i<=roundCount;i++){
+        for(int i=1;i<=roundCount;i++) {
 
-            Round newRound=new Round("Round: "+i);
-            //fill the Round with amount of desired heats
+            Round newRound = new Round("Round: " + i);
+            rounds.put(i,newRound);
+
+        }
+        //create the amount of heats in the array list, they still need to get loaded into the rounds
             for(int l=1;l<=heatCount;l++){
                 Heat newHeat= new Heat("Heat:"+l);
-                //Fill current round with the amount of heats desired from edit box
-                //newRound.heat.put(l,newHeat);
+
 
                 //right now the round does not have any heats
                 heats.add(newHeat);
@@ -214,13 +215,11 @@ public class raceOrganizer {
             }
 
             //Create Rounds with filled heat amounts
-            rounds.put(i,newRound);
+
         }
-        for(Round item: rounds.values()){
-            System.out.println("Printing out an item");
-            System.out.println(item);
-        }
-    }
+
+
+
 
     //**************Configure the Heats*********************
     //The user will select a pilot from a list and then a heat

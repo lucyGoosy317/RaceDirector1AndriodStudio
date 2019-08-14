@@ -37,6 +37,13 @@ public class ExampleInstrumentedTest {
 
     }
 
+    @Test
+    public void testMakePilot(){
+        String name="lucy";
+        Channel channel=new Channel("Band A","A7","3353");
+        race.makeNewPilot(name,channel);
+    }
+
 
 
 
