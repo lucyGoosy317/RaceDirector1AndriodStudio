@@ -35,8 +35,9 @@
         android:layout_marginRight="98dp"
         android:layout_marginBottom="572dp"
         android:ems="10"
+        android:hint="Enter Pilot"
         android:inputType="textPersonName"
-        android:text="Enter Pilot Name"
+        android:textColorHint="@color/colorAccent"
         android:textAlignment="center"
         android:textColor="@android:color/white" />
 
