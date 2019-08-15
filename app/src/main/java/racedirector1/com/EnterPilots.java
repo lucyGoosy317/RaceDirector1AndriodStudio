@@ -12,6 +12,9 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+/**
+ * @EnterPilots Allows the user to create a pilot
+ */
 public class EnterPilots extends AppCompatActivity {
 
     Spinner channelListView;
@@ -39,6 +42,9 @@ public class EnterPilots extends AppCompatActivity {
 
     }
 
+    /**
+     * @BandXClicked is to allow the radio button display what is inside the spinner(combodropdown box)
+     */
     public void bandAClicked() {
         BandA = (RadioButton) findViewById(R.id.bandA);
         BandA.setOnClickListener(new View.OnClickListener() {
@@ -117,27 +123,44 @@ public class EnterPilots extends AppCompatActivity {
         });
     }
 
+    /**
+     * @enterPilotClicked allows the user to click the enter button, which grabs the channel and pilot name
+     */
     public void enterPilotClicked() {
         enterButton = (Button) findViewById(R.id.enterButton);
+
         enterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Channel channel = (Channel) channelListView.getSelectedItem();
-                pilotName = (EditText) findViewById(R.id.enterPilotName);
-                String pilot =(String)pilotName.getText().toString();
 
+                //try/catch to check if a channel is selected
+                try {
+                    Channel channel = (Channel) channelListView.getSelectedItem();
+                    pilotName = (EditText) findViewById(R.id.enterPilotName);
+                    String pilot = (String) pilotName.getText().toString();
+                    //check to see if the user enter name, could use a text watcher, but this is easier to read
+                    if(!pilot.isEmpty()) {
+                        boolean check = MainActivity.RaceData.makeNewPilot(pilot, channel);
+                        if (check == true) {
+                            System.out.println("Pilot Name: " + pilot + " Channel:" + channel.toString());
+                            Toast.makeText(EnterPilots.this, pilot + "Has been added", Toast.LENGTH_SHORT).show();
+                        } else {
 
-                    boolean check=MainActivity.RaceData.makeNewPilot(pilot,channel);
-                    if(check==true) {
-                        System.out.println("Pilot Name: " + pilot + " Channel:" + channel.toString());
-                        Toast.makeText(EnterPilots.this, pilot + "Has been added", Toast.LENGTH_SHORT).show();
-                    }else {
+                            Toast.makeText(EnterPilots.this, pilot + " is already in the race ", Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+                        //if no name has been enters for the pilot display message
+                        Toast.makeText(EnterPilots.this,"Enter a name for this pilot", Toast.LENGTH_SHORT).show();
 
-                        Toast.makeText(EnterPilots.this, pilot + " is already in the race ", Toast.LENGTH_SHORT).show();
                     }
+                } catch (NullPointerException e) {
+                    //if the user enter a name but did not select a channel, display this message
+                    Toast.makeText(EnterPilots.this, "Please select a Channel", Toast.LENGTH_SHORT).show();
+
+                }
+
 
             }
-
         });
 
 

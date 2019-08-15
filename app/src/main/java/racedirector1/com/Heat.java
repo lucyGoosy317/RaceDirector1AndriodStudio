@@ -39,7 +39,7 @@ public class Heat {
     //**************Methods*********************
     //will add a pilot into a heat
     public void addPilotsToHeat(Pilots heatPilot) {
-
+        PilotsInHeat.add(heatPilot);
     }
 
     //will remove a pilot from a heat

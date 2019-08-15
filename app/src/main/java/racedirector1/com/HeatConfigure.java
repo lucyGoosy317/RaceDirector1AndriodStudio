@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
@@ -22,19 +23,26 @@ public class HeatConfigure extends AppCompatActivity {
     public ArrayList<Pilots> PilotListInHeat;
     public ArrayList<Pilots> allPilotsInRace;
     public Spinner pilots;
+    public int selectedPostion;
+    ArrayAdapter<Pilots> gridViewArrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_heat_configure);
         goBackToMenuStart();
-        viewPilotHeatWithComboBoxSpinner();
+
         addPilotToHeat();
         seePilotsInRace();
+        viewPilotHeatWithComboBoxSpinner();
+        changeViewInsideHeat();
     }
 
 
-    //finished button will take the user back to the main menu
+    /**
+     * @goBackToMenuStart finished button will take the user back to the main menu
+     *
+     */
     public void goBackToMenuStart() {
         finishedButton = (Button) findViewById(R.id.FinishedButton);
         //raceNumbersFont=Typeface.createFromAsset(getAssets(),"fonts/RACINGNUMBERS.TTF");
@@ -51,13 +59,17 @@ public class HeatConfigure extends AppCompatActivity {
 
     }
 
-    //Set the pilots inside the race selectable left off here 8/11
+
+    /**
+     * @seePilotsInRace Set the pilots inside the race to be selectable
+     */
     public void seePilotsInRace(){
         allPilotsInRace=MainActivity.RaceData.getPilotGeneralPilotList();
         pilots=(Spinner)findViewById(R.id.PilotListSpinner);
         ArrayAdapter<Pilots> adapterPilots = new ArrayAdapter<Pilots>(HeatConfigure.this, android.R.layout.simple_spinner_item, allPilotsInRace);
         adapterPilots.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         pilots.setAdapter(adapterPilots);
+
 
     }
 
@@ -66,21 +78,11 @@ public class HeatConfigure extends AppCompatActivity {
     public void viewPilotHeatWithComboBoxSpinner(){
         HeatList=MainActivity.RaceData.getHeats();
         heatSelector = (Spinner) findViewById(R.id.heatComboBox);
-        ArrayAdapter<Heat> adapter = new ArrayAdapter<Heat>(HeatConfigure.this, android.R.layout.simple_spinner_item, HeatList);
+        ArrayAdapter<Heat> adapter = new ArrayAdapter<Heat>(getApplicationContext(), android.R.layout.simple_spinner_item, HeatList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         heatSelector.setAdapter(adapter);
-        //When the user selects the heat, does not work correctly and crashes the app
-        //heatSelector.setOnClickListener(new View.OnClickListener() {
-           // @Override
-           // public void onClick(View v) {
-            //    Heat selectedHeat=(Heat)heatSelector.getSelectedItem();
-            //    PilotListInHeat=selectedHeat.getPilotsInHeat();
-             //   ArrayAdapter<Pilots> gridViewArrayAdapter = new ArrayAdapter<Pilots>
-             //           (HeatConfigure.this,android.R.layout.simple_list_item_1, PilotListInHeat);
 
-               // pilotHeatViewer.setAdapter(gridViewArrayAdapter);
-            //}
-        //});
+
 
     }
 
@@ -90,22 +92,64 @@ public class HeatConfigure extends AppCompatActivity {
     public void addPilotToHeat(){
 
         addPilot=(Button)findViewById(R.id.addPilotToHeatButton);
-
+        //final Pilots tempPilot= (Pilots)pilots.getSelectedItem();
+        //String name=tempPilot.getPilotName();
         addPilot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //pilo
-                //Heat selectedHeat=(Heat)heatSelector.getSelectedItem();
-                //PilotList=selectedHeat.getPilotsInHeat();
-                //ArrayAdapter<Pilots> gridViewArrayAdapter = new ArrayAdapter<Pilots>
-                 //       (HeatConfigure.this,android.R.layout.simple_list_item_1, PilotList);
+              Pilots tempPilot=(Pilots)pilots.getSelectedItem();
+              //Heat tempheat=(Heat)heatSelector.getSelectedItem();
+              MainActivity.RaceData.getHeats().get(heatSelector.getSelectedItemPosition()).addPilotsToHeat(tempPilot);
+              for(int i=0;i<MainActivity.RaceData.heats.size();i++){
+                  System.out.println("Heat "+ i +MainActivity.RaceData.heats.get(i).PilotsInHeat.toString());
 
-               // pilotHeatViewer.setAdapter(gridViewArrayAdapter);
+              }
+
             }
         });
 
     }
 
+    public void removePilot(){
+
+
+    }
+
+
+
+    public void changeViewInsideHeat(){
+        //When the user selects the heat, does not display pilots, find out why 8:09 PM 8/14
+        heatSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                try {
+                    PilotListInHeat = MainActivity.RaceData.heats.get(position).getPilotsInHeat();
+                    selectedPostion=position;
+                    //Heat selectedHeat = (Heat) heatSelector.getSelectedItem();
+                    //PilotListInHeat = selectedHeat.getPilotsInHeat();
+                    ArrayAdapter<Pilots> gridViewArrayAdapter = new ArrayAdapter<Pilots>
+                            (HeatConfigure.this, android.R.layout.simple_list_item_1, PilotListInHeat);
+
+                    pilotHeatViewer.setAdapter(gridViewArrayAdapter);
+                    //Pilots tempPilot= (Pilots)pilotHeatViewer.getSelectedItem();
+
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+
+
+
+
+        });
+
+
+    }
 
 
 

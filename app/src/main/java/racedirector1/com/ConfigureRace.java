@@ -56,7 +56,9 @@ public class ConfigureRace extends AppCompatActivity {
                     //Only allow the user to enter a number greater than 0 for rounds and heats
                     if (rndCount > 0 && htCount > 0) {
                         MainActivity.RaceData.configureRace(rndCount, htCount);
-                        getRdHtAmount.setActivated(false);
+                        //disable button to not allow user to enter any more rounds or heats, even if back is pressed, left off here
+                        getRdHtAmount.setClickable(false);
+                        Toast.makeText(ConfigureRace.this,"Race of "+rndCount +" rounds, with " +htCount +" heats, created", Toast.LENGTH_SHORT).show();
                         //Otherwise tell them to enter a number greater than 0
                     } else {
                         Toast.makeText(ConfigureRace.this, "Please enter a values greater than zero", Toast.LENGTH_SHORT).show();

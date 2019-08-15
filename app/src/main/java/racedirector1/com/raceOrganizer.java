@@ -8,8 +8,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import static racedirector1.com.MainActivity.RaceData;
 
@@ -122,13 +120,16 @@ public class raceOrganizer {
         String file = "res/raw/channellist.csv";
         InputStream in = this.getClass().getClassLoader().getResourceAsStream(file);
         BufferedReader reader = new BufferedReader(new InputStreamReader(in, Charset.forName("UTF-8")));
-
         String line;
+        //A try catch to ensure the app does not crash when the file is not found for channels
         try {
+            //reading line by line
             while ((line = reader.readLine()) != null) {
+                //splitting the line by delimiter , to get each item on the line and place the item into an array
                 String[] tokens = line.split(",");
                 Channel channel = null;
 
+                //check which band is inside the 0 token to create the correct arraylist
                 switch (tokens[0]) {
                     case "A":
                         channel = new Channel(tokens[0], tokens[1], tokens[2]);
@@ -182,6 +183,7 @@ public class raceOrganizer {
         if (checkIfPilotAlreadyInRace(pilot) == true) {
             System.out.println("adding pilot into race");
             RaceData.pilotGeneralPilotList.add(pilot);
+            //just a check, to see what is loaded into the arraylist in console
             System.out.println(RaceData.pilotGeneralPilotList.toString());
             check = true;
         } else {
@@ -202,7 +204,8 @@ public class raceOrganizer {
         boolean check=true;
 
 
-        //linear search for
+        //linear search for pilots in the already existing list to see if there is a pilot with the same
+        //name, slow option but the list will most likely be small.
         for(int x=0;x<pilotGeneralPilotList.size(); x++) {
             if (pilotGeneralPilotList.get(x).getPilotName().equals(pilot.getPilotName())) {
                 System.out.println("Pilot already exist in the race");
@@ -217,14 +220,20 @@ public class raceOrganizer {
     //**********************************************************************
 
     //***************Configure the Race*********************
-    //will take in the amount of rounds the user wants to have and the amount of heats
-    //used in ConfigureRace Activity.
+
+    /**
+     * @configure will create the heats and rounds, they will both be empty but will be loaded into their
+     * correct data containers
+     * @param roundCount amount of rounds user entered
+     * @param heatCount amount of heats user entered
+     */
     public void configureRace(int roundCount,int heatCount){
 
         //create the amount of Rounds, might have to come back on that round count
         for(int i=1;i<=roundCount;i++) {
 
             Round newRound = new Round("Round: " + i);
+            //put the newly created round into hashmap
             rounds.put(i,newRound);
 
         }
@@ -233,12 +242,12 @@ public class raceOrganizer {
                 Heat newHeat= new Heat("Heat:"+l);
 
 
-                //right now the round does not have any heats
+                //add newly created heat into arraylist
                 heats.add(newHeat);
 
             }
 
-            //Create Rounds with filled heat amounts
+
 
         }
 
@@ -249,6 +258,10 @@ public class raceOrganizer {
     //The user will select a pilot from a list and then a heat
     //The user will then put the pilot into the heat desired
     //Pilot will remain in the heat, maybe same screen can be used for changing pilot heats
+
+    /**
+     *
+     */
     public void configureHeat(){
 
     }
