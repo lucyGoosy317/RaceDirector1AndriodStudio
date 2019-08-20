@@ -143,7 +143,7 @@ public class EnterPilots extends AppCompatActivity {
                         boolean check = MainActivity.RaceData.makeNewPilot(pilot, channel);
                         if (check == true) {
                             System.out.println("Pilot Name: " + pilot + " Channel:" + channel.toString());
-                            Toast.makeText(EnterPilots.this, pilot + "Has been added", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EnterPilots.this, pilot + " has been added", Toast.LENGTH_SHORT).show();
                         } else {
 
                             Toast.makeText(EnterPilots.this, pilot + " is already in the race ", Toast.LENGTH_SHORT).show();

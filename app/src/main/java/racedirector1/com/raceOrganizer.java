@@ -255,15 +255,28 @@ public class raceOrganizer {
 
 
     //**************Configure the Heats*********************
-    //The user will select a pilot from a list and then a heat
-    //The user will then put the pilot into the heat desired
-    //Pilot will remain in the heat, maybe same screen can be used for changing pilot heats
-
     /**
-     *
+     * @configureHeat will check if the pilot exist inside the heat
      */
-    public void configureHeat(){
+    public boolean configureHeat(Pilots inputPilot,int heatIndex){
 
+        boolean check=true;
+        //if pilot already exist in the hear
+        //conduct another linear search
+        for(int i=0;i<heats.get(heatIndex).PilotsInHeat.size();i++){
+
+            if(heats.get(heatIndex).PilotsInHeat.get(i).getPilotName().equals(inputPilot.getPilotName())){
+
+                //"this pilot is already inside this heat";
+                check=false;
+                break;
+
+            }else{
+                //inputPilot.getPilotName()+ " has been added";
+                check=true;
+            }
+        }
+        return check;
     }
 
 

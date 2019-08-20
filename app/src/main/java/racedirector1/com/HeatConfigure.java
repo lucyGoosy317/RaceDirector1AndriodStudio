@@ -1,6 +1,8 @@
 package racedirector1.com;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -29,14 +32,19 @@ public class HeatConfigure extends AppCompatActivity {
     public ArrayList<Pilots> allPilotsInRace;
     public Spinner pilots;
     public int selectedPostion;
-    ArrayAdapter<Pilots> gridViewArrayAdapter;
+
+    /**
+     *
+     * TODO: Remove pilots from heat Method 8/20 12:17
+     *
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_heat_configure);
         goBackToMenuStart();
-
+        selectPilotToBeRemoved();
         addPilotToHeat();
         seePilotsInRace();
         viewPilotHeatWithComboBoxSpinner();
@@ -102,6 +110,8 @@ public class HeatConfigure extends AppCompatActivity {
      * @addPilotToHeat
      *add pilot to a heat from selected combo boxes, still needs a check/stop for existing pilots in gen list or remove pilots
      *from gen list, as to not create duplicate pilots inside heats
+     *
+     * completed, there is a check for pilots in heats for no duplicates in heats
      */
     public void addPilotToHeat(){
 
@@ -112,13 +122,19 @@ public class HeatConfigure extends AppCompatActivity {
             public void onClick(View v) {
               Pilots tempPilot=(Pilots)pilots.getSelectedItem();
 
-              MainActivity.RaceData.getHeats().get(heatSelector.getSelectedItemPosition()).addPilotsToHeat(tempPilot);
-              //update the gridView with newly added pilot inside array, from current selected heat
-              ArrayAdapter<Pilots> gridViewArrayAdapter = new ArrayAdapter<Pilots>
-                        (HeatConfigure.this, android.R.layout.simple_list_item_1, PilotListInHeat);
+              if(MainActivity.RaceData.configureHeat(tempPilot,heatSelector.getSelectedItemPosition())) {
+                  MainActivity.RaceData.getHeats().get(heatSelector.getSelectedItemPosition()).addPilotsToHeat(tempPilot);
+                  //update the gridView with newly added pilot inside array, from current selected heat
+                  ArrayAdapter<Pilots> gridViewArrayAdapter = new ArrayAdapter<Pilots>
+                          (HeatConfigure.this, android.R.layout.simple_list_item_1, PilotListInHeat);
 
-                pilotHeatViewer.setAdapter(gridViewArrayAdapter);
+                  pilotHeatViewer.setAdapter(gridViewArrayAdapter);
+                  Toast.makeText(HeatConfigure.this, tempPilot.getPilotName() + " has been added to heat", Toast.LENGTH_SHORT).show();
 
+              }else{
+                  Toast.makeText(HeatConfigure.this, tempPilot.getPilotName() + " is already in this heat", Toast.LENGTH_SHORT).show();
+
+              }
 
             }
         });
@@ -133,7 +149,9 @@ public class HeatConfigure extends AppCompatActivity {
      * TODO: create removePilot from gridview selection and readd pilot object into pilot gen list, ensure no duplicates
      *
      */
-    public void removePilot(){
+    public void selectPilotToBeRemoved(){
+
+
 
 
     }
@@ -153,15 +171,13 @@ public class HeatConfigure extends AppCompatActivity {
                 try {
                     PilotListInHeat = MainActivity.RaceData.heats.get(position).getPilotsInHeat();
                     selectedPostion=position;
-                    //Heat selectedHeat = (Heat) heatSelector.getSelectedItem();
-                    //PilotListInHeat = selectedHeat.getPilotsInHeat();
-                    //pilotHeatViewer=(GridView) findViewById(R.id.pilotGridView);
+
                     ArrayAdapter<Pilots> gridViewArrayAdapter = new ArrayAdapter<Pilots>
                             (HeatConfigure.this, android.R.layout.simple_list_item_1, PilotListInHeat);
 
                     pilotHeatViewer.setAdapter(gridViewArrayAdapter);
                     System.out.println(pilotHeatViewer.toString());
-                    //Pilots tempPilot= (Pilots)pilotHeatViewer.getSelectedItem();
+
 
                 } catch (NullPointerException e) {
                     e.printStackTrace();
